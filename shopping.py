@@ -206,22 +206,29 @@ def evaluate(labels, predictions):
     """
 
 
-    largo_labels = len(labels)
     positivos = 0
     negativos = 0
-    for label in labels:
-        if label == 1:
-            positivos += 1
-        else:
-            negativos += 1
+    tot_positivo = 0
+    tot_negativo = 0
 
-    sensitivity = positivos / largo_labels
-    specificity = negativos / largo_labels
+    for actual, predecido in zip(labels,predictions):
+        if actual == 1:
+            tot_positivo += 1
+        else:
+            tot_negativo += 1
+        if actual == predecido:
+            if actual == 1:
+                positivos += 1
+            else:
+                negativos += 1
+
+    sensitivity = positivos / tot_positivo
+    specificity = negativos / tot_negativo
 
     return sensitivity, specificity
 
 
-    #raise NotImplementedError
+    raise NotImplementedError
 
 
 if __name__ == "__main__":
